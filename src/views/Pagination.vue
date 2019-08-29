@@ -18,7 +18,7 @@
               :class="IsCurrentPage(page)"
               v-if="currentPage !== page"
             >{{ page }}</a>
-            <a href="Javascript:void(0)" :class="IsCurrentPage(page)" v-else>{{ page }}</a>
+            <!-- <a href="Javascript:void(0)" :class="IsCurrentPage(page)" v-else>{{ page }}</a> -->
           </li>
         </ul>
       </nav>
@@ -44,9 +44,12 @@ export default {
   },
   methods: {
     async getAlbums(pageNo) {
+      let page = pageNo || this.$route.query._page;
+
+      console.log(page);
       try {
         const { data, headers } = await axios.get(
-          `${url}?_limit=${recordPerPage}&_page=${pageNo}`
+          `${url}?_limit=${recordPerPage}&_page=${page}`
         );
         this.albums = data;
         this.totalRecord = data.length;

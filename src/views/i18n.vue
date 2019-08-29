@@ -23,12 +23,6 @@
 </template>
 <script>
 export default {
-  mounted() {
-    console.log(this.$i18n);
-    const localeRouter = this.$route.query.locale;
-
-    this.$i18n.locale = localeRouter;
-  },
   computed: {
     nextLocale() {
       const localeRouter = this.$route.query.locale;

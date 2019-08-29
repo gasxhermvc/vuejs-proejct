@@ -49,4 +49,28 @@ const router = new VueRouter({
   mode: "history"
 });
 
+const isAuth = () => {
+  const token = localStorage.getItem("token");
+
+  return token ? true : false;
+};
+
+const whiteList = ["/", "/about"];
+
+router.beforeEach((to, from, next) => {
+  if (whiteList.includes(to.path)) {
+    next();
+
+    return;
+  }
+
+  if (!isAuth()) {
+    next({ path: "/" });
+
+    return;
+  }
+
+  next();
+});
+
 export default router;
